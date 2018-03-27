@@ -10,12 +10,15 @@
   position: absolute;
   width: 59px;
   height: 59px;
+
+  transition: all .2s ease-in;
+
   left: 0px;
   top: 0px;
 }
 
 .loginYoutube:hover {
-  color: red;
+  color: hsl(0, 100%, 50%);
 }
 
 .loginGoogle {
@@ -34,20 +37,33 @@
   width: 59px;
   height: 59px;
 
+  transition: all .2s ease-in;
+
   left: 37.12%;
   right: 37.12%;
   top: 0%;
   bottom: 57.55%;
 }
+
+.loginTwitter:hover {
+  color: #1da1f2;
+}
+
 .loginTwitch {
   position: absolute;
   width: 59px;
   height: 59px;
 
+  transition: all .2s ease-in;
+
   left: 74.24%;
   right: 0%;
   top: 0%;
   bottom: 57.55%;
+}
+
+.loginTwitch:hover {
+  color: #4b367c;
 }
 
 .loginChoicePrompt {
@@ -63,4 +79,9 @@
   right: -3.49%;
   top: -34.5%;
   bottom: 130%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
