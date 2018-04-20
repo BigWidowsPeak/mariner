@@ -38,7 +38,7 @@ const Charts = (props) => {
         <button onClick={function(){props.filterSentiments(sentiments.Praise)}}>Filter {sentiments.Praise}</button>
         <button onClick={function(){props.filterSentiments(sentiments.Positive)}}>Filter {sentiments.Positive}</button>
         <button onClick={function(){props.filterSentiments(sentiments.Warm)}}>Filter {sentiments.Warm}</button>
-        <button onClick={function(){props.filterSentiments(sentiments.Nuetral)}}>Filter {sentiments.Neutral}</button>
+        <button onClick={function(){props.filterSentiments(sentiments.Neutral)}}>Filter {sentiments.Neutral}</button>
         <button onClick={function(){props.filterSentiments(sentiments.Shade)}}>Filter {sentiments.Shade}</button>
         <button onClick={function(){props.filterSentiments(sentiments.Negative)}}>Filter {sentiments.Negative}</button>
         <button onClick={function(){props.filterSentiments(sentiments.Mean)}}>Filter {sentiments.Mean}</button>

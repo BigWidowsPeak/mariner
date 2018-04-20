@@ -7,11 +7,9 @@ import Login from './containers/LogIn/Login.jsx';
 import Main from './containers/Main/Main.jsx';
 import Spinner from './UI/Spinner/Spinner.jsx';
 
-
 import NoContentError from './components/NoContentError/NoContentError.jsx';
 import TestChart from './components/TestChart/testChart.jsx';
 import queue from 'queue'
-
 
 class App extends React.Component {
   constructor(props) {
@@ -36,35 +34,24 @@ class App extends React.Component {
     console.log('this.state looks like ', this.state);
     this.changeView = this.changeView.bind(this);
   }
-  
-  
-
-  componentWillMount() {
-
-  }
 
   async componentDidMount() {
-
     // Check to see if a user is established
-    // While checking, display loading component    
+    // While checking, we display loading component    
     let { data: {name, id} } = await axios.get('http://localhost:5000/getUser');
     if (name !== undefined || id !== undefined) {
       // Print data:
       console.log(`Username: ${name} // ID: ${id}`);
-      // Get data from CR:
-
       // Get Videos:
       const userVideos = await axios.post('http://localhost:5001/appQuery', {
         query: `SELECT * FROM videos where user in (select idusers from users where username = '${name}')`
       });
-
       // Get Comments:
       const videoComments = await axios.post('http://localhost:5001/appQuery', {
         query: `SELECT * FROM comments where video in (select idvideos from videos where title = '${userVideos.data[0].title || userVideos}')`
       });
       // Fill state with content, set view to 'main', loading false.   
       // If a user comes back and there is no content, dispaly no content page.
-         
       this.setState({
         user: name,
         userVideos: userVideos.data,
@@ -80,58 +67,8 @@ class App extends React.Component {
         view: 'login'
       })
     }
-    // if (this.state.view === 'login') {
-    //   const currentUser = await axios.get('http://localhost:5000/getUser');
-    //   let currentUserName = currentUser.data.name
-    //   console.log('currentUser is ', currentUser)
-    //   console.log('currentUserName is ', currentUserName)
-    //   // const userVideos = await axios.post('http://localhost:5001/appQuery', {
-    //   //   query: `SELECT * FROM videos where user in (select idusers from users where username = '${currentUser.data}')`
-    //   // });
-    //   //added by joe
-    //   console.log('checking for ', currentUser.data.id)
-    //   currentUser.data = await  axios.get('http://localhost:3000/api/all-data/by-id',  {
-    //     params: {
-    //       id: currentUser.data.id
-    //     }
-    //   })
-
-    //   const userVideos = await axios.post('http://localhost:5001/appQuery', {
-    //     query: `SELECT * FROM videos where user in (select idusers from users where username = '${currentUserName}')`
-    //   });
-
-    //   console.log('userVideos in componentDidMount ', userVideos)
-    //   console.log('userVideos is here title is ', userVideos.data[0].title)
-    //   const videoComments = await axios.post('http://localhost:5001/appQuery', {
-    //     query: `SELECT * FROM comments where video in (select idvideos from videos where title = '${userVideos.data[0].title || userVideos}')`
-    //   });
-    //   console.log('videoComments is in here is ', videoComments)
-      
-    //   console.log(currentUser.data.data[0].videos[0], 'hedsdij')
-    //   this.setState({
-    //     user: currentUser.data.data[0].name,
-    //     userVideos:   userVideos.data,
-    //     currentVideo:  userVideos.data[0],
-    //     videoComments: videoComments.data
-    //   });
-      
-
-    // }
-
-    // if (this.state.user !== '' && this.state.userVideos !== [] && this.state.videoComments !== []) {
-    //   this.setState({
-    //     view: 'main'
-    //   });
-    // } else if (this.state.userVideos.length === 0 && this.state.user !== '') {
-    //   this.setState({
-    //     view: 'no-content'
-    //   })
-    // }
     console.log('state after componentDidMount ', this.state)
   }
-
-
-
 
   async analyzeComments(comments) {
     let sentComments = []
@@ -205,7 +142,6 @@ class App extends React.Component {
     
   }
 
-
   renderQuestions(comments) {
     console.log('render Q clicked')
     let collection = [];
@@ -228,7 +164,8 @@ class App extends React.Component {
     this.setState({
       currentTitle: item.title, 
       currentVideo: item,
-      commentDescription: 'Video Comments'  
+      commentDescription: 'Video Comments',
+      originalSentiments: null
     });
     this.getComments(item)
   }
