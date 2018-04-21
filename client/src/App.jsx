@@ -67,6 +67,10 @@ class App extends React.Component {
         view: 'login'
       })
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> a7c8b65adebd38c4ce943e0972bf75d5e917a8f6
     console.log('state after componentDidMount ', this.state)
   }
 
@@ -96,10 +100,10 @@ class App extends React.Component {
       '-5': 'Hostile',
       '-4': 'Mean',
       '-3': 'Negative',
-      '-2': 'Shade',
-      '-1': 'Nuetral',
-       '0': 'Nuetral',
-       '1': 'Nuetral',
+      '-2': 'Unpleasant',
+      '-1': 'Neutral',
+       '0': 'Neutral',
+       '1': 'Neutral',
        '2': 'Warm',
        '3': 'Positive',
        '4': 'Praise',
@@ -164,8 +168,13 @@ class App extends React.Component {
     this.setState({
       currentTitle: item.title, 
       currentVideo: item,
+<<<<<<< HEAD
       commentDescription: 'Video Comments',
       originalSentiments: null
+=======
+      commentDescription: 'Video Comments' ,
+      originalSentiments: null 
+>>>>>>> a7c8b65adebd38c4ce943e0972bf75d5e917a8f6
     });
     this.getComments(item)
   }
@@ -264,34 +273,7 @@ class App extends React.Component {
     });
   }
 
-  sendMultiples() {
-    let q = queue();
-    let replied = this.state.replyAll;
-    replied.forEach((comment) => {
-      q.push(() => {
-        return new Promise((resolve, reject) => {
-          axios.post('http://localhost:3000/api/comments/reply', {
-            chanId: this.state.currentVideo.chanId,
-            videoID: this.state.currentVideo.contentId,
-            commentID: comment.providedID,
-            textOriginal: this.state.replyText
-          })
-          .then((response) => {
-            console.log('in response of sendMultiples')
-            resolve()
-          })
-          .catch((err) => {
-            console.log('in err of sendMultiples')
-            reject()
-          })
-        })
-      })
-    })
-    q.start((err) => {
-      if (err) throw err
-      console.log('all done ')  
-    }) 
-  }
+  
 
   sendReply() {
     console.log('Send Reply fired!');
@@ -348,9 +330,6 @@ class App extends React.Component {
     if (this.state.view === 'videos') {
       return <Videos videos={this.state.userVideos} changeView={this.changeView.bind(this)} pass={this.passVideo.bind(this)} serviceName='YouTube'/>
     }
-    // if (this.state.view === 'comments') {
-    //   return <Comments title={this.state.currentTitle} comments={this.state.videoComments} renderQuestions={this.renderQuestions.bind(this)}/>
-    // }
     if (this.state.view === 'main') {
       return <Main 
               serviceName='YouTube'
@@ -372,7 +351,6 @@ class App extends React.Component {
               replyAllCollection={this.state.replyAll}
               renderGraph={this.renderGraph.bind(this)}
               renderReplyAll={this.renderReplyAll.bind(this)}
-              sendMultiples={this.sendMultiples.bind(this)}
               analyzeComments={this.analyzeComments.bind(this)}
               countAnalyzed={this.countAnalyzed.bind(this)}
               filterSentiments={this.filterSentiments.bind(this)}
