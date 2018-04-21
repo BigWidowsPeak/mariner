@@ -14,6 +14,7 @@ const replied = require('./routes/replied')
 const app = express();
 const cors = require('cors');
 const queue = require('queue');
+const PORT = process.env.PORT || 5001;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,8 +53,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(5001, () => {
-	console.log('comment app listening on 5001')
+app.listen(PORT, () => {
+	console.log('comment app listening on ', PORT);
 })
 
 module.exports = app;
