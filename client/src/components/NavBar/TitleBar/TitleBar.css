@@ -2,8 +2,10 @@
   position: absolute;
   width: 317px;
   height: 43px;
-  left: 561px;
-  top: 30%;
+  /* left: 561px;
+  top: 30%; */
+  margin-top: 20px; 
+  margin-left: 40%;
 
   font-family: Trebuchet MS;
   font-style: normal;

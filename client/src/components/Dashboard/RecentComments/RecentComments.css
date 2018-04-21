@@ -1,8 +1,14 @@
 .commentsColumn {
-  position: absolute;
-  left: 760px;
-  column-count: 1;
-  column-width: 578px;
+  grid-area: active-comments;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 188px 188px 188px;
+  grid-gap: 20px; 
+  /* position: absolute;
+  left: 760px; */
+  
+  /* column-count: 1;
+  column-width: 578px; */
   z-index: -1000;
 }
 

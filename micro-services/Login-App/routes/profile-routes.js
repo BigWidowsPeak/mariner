@@ -11,6 +11,12 @@ const authCheck = (req, res, next) => {
     }
 };
 
+router.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8080")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    next()
+});
+
 router.get('/', authCheck, (req, res) => {
     console.log(Object.keys(req.user.name), )
     res.render('youtubeVideos', { user: req.user, comments: req.user._doc.comments, data: req.user._doc.videos });

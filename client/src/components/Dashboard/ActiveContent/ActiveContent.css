@@ -1,6 +1,7 @@
 .activeColumn {
-  position: absolute;
-  left: 140px;
+  /* position: absolute;
+  left: 140px; */
+  grid-area: active-video;
   column-count: 1;
   column-width: 280px;
 }

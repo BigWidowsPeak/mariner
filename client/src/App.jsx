@@ -38,11 +38,14 @@ class App extends React.Component {
   async componentDidMount() {
     // Check to see if a user is established
     // While checking, we display loading component    
-    let { data: {name, id} } = await axios.get('http://localhost:5000/getUser');
-    // let { data: {name, id} } = await axios.get('https://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/getUser');
-    if (name !== undefined || id !== undefined) {
+    let { data: {name, id: _id} } = await axios.get('http://localhost:5000/getUser');
+    // let { data: {name, _id} } = await axios.get('http://getmyyoutubedata.herokuapp.com/profile/youtube');
+    // let { status, data: {name, _id} } = await axios.get('http://localhost:3000/profile/youtube');
+    
+    console.log(`Status: ${status} // Username: ${name} // ID: ${_id}`);
+    if (name !== undefined || _id !== undefined) {
       // Print data:
-      console.log(`Username: ${name} // ID: ${id}`);
+      console.log(`Username: ${name} // ID: ${_id}`);
       // Get Videos:
       // const userVideos = await axios.post('http://localhost:5001/appQuery', {
       const userVideos = await axios.post('https://fast-island-10012.herokuapp.com/appQuery', {
@@ -177,8 +180,8 @@ class App extends React.Component {
 
   getComments(videoTitle) {
     console.log('video title is ', videoTitle)
-    // axios.post('http:localhost:5000/appQuery', {
-    axios.post('http://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/appQuery', {
+    // axios.post('http:localhost:5001/appQuery', {
+    axios.post('https://fast-island-10012.herokuapp.com/appQuery', {
       query: `SELECT * FROM comments where video in (select idvideos from videos where title = '${videoTitle.title || videoTitle}')`
     })
     .then((response) => {

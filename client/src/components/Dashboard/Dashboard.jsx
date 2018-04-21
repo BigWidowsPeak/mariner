@@ -9,7 +9,7 @@ import ActiveContent from './ActiveContent/ActiveContent.jsx';
 const dashBoard = (props) => {
 
   return ( 
-    <div>
+    <div className={classes.dashBoard}>
       <p className={classes.activeContentTitle}>
         Active Content
       </p>

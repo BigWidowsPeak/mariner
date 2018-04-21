@@ -1,9 +1,20 @@
+.dashBoard {
+  display: grid;
+  margin-top: 150px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: 
+    "content-title comments-title"
+    "active-video  active-comments";
+}
+
 .activeContentTitle {
-  position: absolute;
-  width: 222px;
-  height: 43px;
-  left: 141px;
-  top: 132px;
+  grid-area: content-title;
+  /* position: absolute; */
+  /* width: 222px; */
+  /* height: 43px; */
+  /* left: 141px;
+  top: 132px; */
   
   font-family: Trebuchet MS;
   font-style: normal;
@@ -16,11 +27,12 @@
 }
 
 .recentCommentTitle {
-  position: absolute;
+  grid-area: comments-title;
+  /* position: absolute;
   width: 260px;
   height: 43px;
   left: 771px;
-  top: 132px;
+  top: 132px; */
   
   font-family: Trebuchet MS;
   font-style: normal;

@@ -17,10 +17,10 @@
 }
 
 .logOutButton {
-  position: absolute;
-  width: 170px;
+  position: relative;
+  margin-left: 84%;
+  width: 186px;
   height: 32px;
-  left: 1239px;
   top: 19px;
 
   background: #EB5757;
