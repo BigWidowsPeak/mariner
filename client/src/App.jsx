@@ -39,15 +39,18 @@ class App extends React.Component {
     // Check to see if a user is established
     // While checking, we display loading component    
     let { data: {name, id} } = await axios.get('http://localhost:5000/getUser');
+    // let { data: {name, id} } = await axios.get('https://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/getUser');
     if (name !== undefined || id !== undefined) {
       // Print data:
       console.log(`Username: ${name} // ID: ${id}`);
       // Get Videos:
-      const userVideos = await axios.post('http://localhost:5001/appQuery', {
+      // const userVideos = await axios.post('http://localhost:5001/appQuery', {
+      const userVideos = await axios.post('https://fast-island-10012.herokuapp.com/appQuery', {
         query: `SELECT * FROM videos where user in (select idusers from users where username = '${name}')`
       });
       // Get Comments:
-      const videoComments = await axios.post('http://localhost:5001/appQuery', {
+      // const videoComments = await axios.post('http://localhost:5001/appQuery', {
+      const videoComments = await axios.post('https://fast-island-10012.herokuapp.com/appQuery', {
         query: `SELECT * FROM comments where video in (select idvideos from videos where title = '${userVideos.data[0].title || userVideos}')`
       });
       // Fill state with content, set view to 'main', loading false.   
@@ -67,17 +70,15 @@ class App extends React.Component {
         view: 'login'
       })
     }
-<<<<<<< HEAD
-=======
     
->>>>>>> a7c8b65adebd38c4ce943e0972bf75d5e917a8f6
     console.log('state after componentDidMount ', this.state)
   }
 
   async analyzeComments(comments) {
     let sentComments = []
     if (this.state.originalSentiments === null) {  
-      sentComments = await axios.post('http://localhost:5001/analyze/comments', {
+      // sentComments = await axios.post('http://localhost:5001/analyze/comments', {
+      sentComments = await axios.post('https://fast-island-10012.herokuapp.com/analyze/comments', {
         comments: this.state.videoComments
       })
       console.log('analyzedComments is ', sentComments);
@@ -168,20 +169,16 @@ class App extends React.Component {
     this.setState({
       currentTitle: item.title, 
       currentVideo: item,
-<<<<<<< HEAD
-      commentDescription: 'Video Comments',
-      originalSentiments: null
-=======
       commentDescription: 'Video Comments' ,
       originalSentiments: null 
->>>>>>> a7c8b65adebd38c4ce943e0972bf75d5e917a8f6
     });
     this.getComments(item)
   }
 
   getComments(videoTitle) {
     console.log('video title is ', videoTitle)
-    axios.post('http://localhost:5001/appQuery', {
+    // axios.post('http:localhost:5000/appQuery', {
+    axios.post('http://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/appQuery', {
       query: `SELECT * FROM comments where video in (select idvideos from videos where title = '${videoTitle.title || videoTitle}')`
     })
     .then((response) => {
@@ -281,7 +278,8 @@ class App extends React.Component {
     let accessToken;
     let refreshToken;
     // set this equal to an axios call to Joe's mongoDb that has the tokens. (POST: 3000/api/all-data/by-name 
-    axios.post('http://localhost:3000/api/all-data/by-name', {
+    // axios.post('http://localhost:3000/api/all-data/by-name', {
+    axios.post('https://getmyyoutubedata.herokuapp.com/api/all-data/by-name', {
       name: this.state.user
     })
     .then((response) => {
@@ -298,7 +296,8 @@ class App extends React.Component {
       // providedID == commentID  Ex. UgwXC-AmR5Qoc9-JYtJ4AaABAg
       // contentID ??? videoID // parentID  Ex. qPjiMYNyE1Y
       // chanId === chanId  Ex. UC4zIIM0SSi27usDj00g
-      axios.post('http://localhost:3000/api/comments/replytodirect', {
+      // axios.post('http://localhost:3000/api/comments/replytodirect', {
+      axios.post('https://getmyyoutubedata.herokuapp.com/api/comments/replytodirect', {
         // chanId: this.state.currentVideo.chanId,
         // videoId: this.state.currentVideo.contentId,
         access_token: accessToken,
